@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserregisterController;
 
+use App\Http\Controllers\ProductController;
+
 use App\Http\Controllers\EnquiryController;
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::POST('/signup',[UserregisterController::class,"store"]);
 Route::POST('/userLogin',[UserregisterController::class,"Login"]);
 Route::POST('/addEnquiry',[EnquiryController::class,"store"]);
+
+Route::POST('/addProduct',[ProductController::class,"store"]);
+Route::GET('/getAllProducts',[ProductController::class,"index"]);
+Route::PUT('/updateProduct/{pid}',[ProductController::class,"updateProduct"]);
+Route::DELETE('/deleteProduct/{product}',[ProductController::class,"deleteProduct"]);
