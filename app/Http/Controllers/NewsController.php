@@ -27,7 +27,7 @@ class NewsController extends Controller
 
     public function index()
     {
-        $news=News::getall();
+        $news=News::all();
 
         return response()->json([
             'message'=>'News Fetch Successfully',
@@ -36,5 +36,5 @@ class NewsController extends Controller
         ]);
     }
 
-    
+
 }

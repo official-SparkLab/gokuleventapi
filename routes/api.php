@@ -33,3 +33,4 @@ Route::PUT('/updateProduct/{pid}',[ProductController::class,"updateProduct"]);
 Route::DELETE('/deleteProduct/{product}',[ProductController::class,"deleteProduct"]);
 
 Route::POST('/addNews',[NewsController::class,"store"]);
+Route::GET('/getAllNews',[NewsController::class,"index"]);
