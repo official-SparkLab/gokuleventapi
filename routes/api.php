@@ -29,7 +29,7 @@ Route::POST('/addEnquiry',[EnquiryController::class,"store"]);
 
 Route::POST('/addProduct',[ProductController::class,"store"]);
 Route::GET('/getAllProducts',[ProductController::class,"index"]);
-Route::PUT('/updateProduct/{pid}',[ProductController::class,"updateProduct"]);
+Route::PUT('/updateProduct/{id}',[ProductController::class,"updateProduct"]);
 Route::DELETE('/deleteProduct/{product}',[ProductController::class,"deleteProduct"]);
 
 Route::POST('/addNews',[NewsController::class,"store"]);

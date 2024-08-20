@@ -36,25 +36,29 @@ class ProductController extends Controller
         ]);
     }
 
-    public function updateProduct(Request $request,$pid)
+    public function updateProduct(Request $request,$id)
     {
-        $product = Product::where('pid', $pid)->first();
-        $product->category = $request->input('category');
-        $product->heading = $request->input('heading');
-        $product->image = $request->input('image');
-        $product->price = $request->input('price');
-        $product->offer_price = $request->input('offer_price');
-        $product->description = $request->input('description');
-        $product->status = $request->input('status');
-        
-        // Save the changes
-        $product->save();
+        $product=Product::where("pid",$id)->first();
 
+if ($product) {
+    // Update the product fields
+    $product->category = $request->input('category');
+    $product->heading = $request->input('heading');
+    $product->image = $request->input('image');
+    $product->price = $request->input('price');
+    $product->offer_price = $request->input('offer_price');
+    $product->description = $request->input('description');
+    $product->status = $request->input('status');
+    $product->top_sale = $request->input('top_sale');  // Adding the new field
+    $product->save();
+}
+    // Save the changes
+  
 
         return response()->json([
             'message' =>'Product Updated Successfully',
             'status'=>'Successful',
-            'data'=>$product::get()
+            'data'=>Product::all()
         ]);
     }
 
