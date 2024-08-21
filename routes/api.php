@@ -32,6 +32,7 @@ Route::GET('/getAllProducts',[ProductController::class,"index"]);
 Route::PUT('/updateProduct/{id}',[ProductController::class,"updateProduct"]);
 Route::PUT('/updateTopSale/{id}',[ProductController::class,"updateTopSales"]);
 Route::PUT('/deleteProduct/{id}',[ProductController::class,"deleteProduct"]);
+Route::GET('/searhById/{id}',[ProductController::class,"getProductByID"]);
 
 Route::POST('/addNews',[NewsController::class,"store"]);
 Route::GET('/getAllNews',[NewsController::class,"index"]);

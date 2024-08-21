@@ -106,5 +106,16 @@ else
             ]);
         }
     }
+    public function getProductByID($id)
+{
+    $product = Product::where("pid", $id)->first();
+
+    return response()->json([
+        'message' => 'Product Fetched',
+        'status' => 'Successful',
+        'data' => $product
+    ]);
+}
+
     
 }

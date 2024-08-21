@@ -50,7 +50,7 @@ class NewsController extends Controller
         $news->save();
 
         return response()->json([
-            'message' => 'News Added Successfully',
+            'message' => 'News Updated Successfully',
             'status' => 'success',
             'data' => $news::where("status","1")->get()
         ]);
