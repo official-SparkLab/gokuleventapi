@@ -16,18 +16,19 @@ class NewsController extends Controller
         $news->category=$request->category;
         $news->tags=$request->tags;
         $news->description=$request->description;
+        $news->status="1";
         $news->save();
 
         return response()->json([
             'message' => 'News Added Successfully',
             'status' => 'success',
-            'data' => $news::get()
+            'data' => $news::where("status","1")->get()
         ]);
     }
 
     public function index()
     {
-        $news=News::all();
+        $news=News::where('status','1')->all();
 
         return response()->json([
             'message'=>'News Fetch Successfully',
@@ -35,6 +36,28 @@ class NewsController extends Controller
             'data' => $news
         ]);
     }
+
+    public function UpdateNews(Request $request,$id)
+{
+        $news=News::where('nid',$id)->first();
+        $news->headline = $request->input('headline');
+        $news->image = $request->input('image');
+        $news->date = $request->input('date');
+        $news->newsby = $request->input('newsby');
+        $news->category = $request->input('category');
+        $news->tags = $request->input('tags');
+        $news->description = $request->input('description');
+        $news->save();
+
+        return response()->json([
+            'message' => 'News Added Successfully',
+            'status' => 'success',
+            'data' => $news::where("status","1")->get()
+        ]);
+}
+
+
+
 
 
 }

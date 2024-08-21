@@ -17,24 +17,26 @@ class ProductController extends Controller
         $save->offer_price=$request->offer_price;
         $save->description=$request->description;
         $save->status="1";
-       
+       $save->top_sale="No";
         $save->save();
 
         return response()->json([
             'message' =>'Product Added Successfully',
             'status' =>'Success',
-            'data' =>$save::get()
+            'data' => Product::where('status', '1')->get()
         ]);
 
     }
     public function index()
     {
-        $product=Product::all();
-        return response()->json([
-            'message' =>'Product details fetched successfully',
-            'status' =>'Success',
-            'data' =>$product
-        ]);
+        $product = Product::where('status', '1')->get();
+
+return response()->json([
+    'message' => 'Product details fetched successfully',
+    'status' => 'Success',
+    'data' => $product
+]);
+
     }
 
     public function updateProduct(Request $request,$id)
@@ -55,7 +57,7 @@ if ($product) {
     return response()->json([
         'message' =>'Product Updated Successfully',
         'status'=>'Successful',
-        'data'=>Product::all()
+        'data'=>Product::where('status','1')->get()
     ]);
 }
 else
@@ -83,7 +85,7 @@ else
              return response()->json([
                 'message' =>'Product Deleted',
                 'status'=>'Successful',
-                'data'=>Product::all()
+                'data'=>Product::where('status','1')->all()
             ]);
         }
     }
@@ -100,7 +102,7 @@ else
              return response()->json([
                 'message' =>'Product Added To Top-Sales',
                 'status'=>'Successful',
-                'data'=>Product::all()
+                'data'=>Product::where('status','1')->all()
             ]);
         }
     }
