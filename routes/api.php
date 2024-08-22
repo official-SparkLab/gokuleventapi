@@ -36,4 +36,6 @@ Route::GET('/searhById/{id}',[ProductController::class,"getProductByID"]);
 
 Route::POST('/addNews',[NewsController::class,"store"]);
 Route::GET('/getAllNews',[NewsController::class,"index"]);
-Route::PUT('/updateNews',[NewsController::class,"UpdateNews"]);
+Route::PUT('/updateNews/{id}',[NewsController::class,"UpdateNews"]);
+Route::PUT('/deleteNews/{id}',[NewsController::class,"deleteNews"]);
+Route::GET('/getNews/{id}',[NewsController::class,"getNews"]);

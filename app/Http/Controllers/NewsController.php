@@ -56,6 +56,44 @@ class NewsController extends Controller
         ]);
 }
 
+public function deleteNews(Request $request,$id)
+{
+    $news=News::where("nid",$id)->first();
+    if($news)
+    {
+    $news->status="0";
+    $news->save();
+
+    return response()->json([
+        'message' => 'News Deleted Successfully',
+        'status' => 'success',
+        'data' => $news::where("status","1")->get()
+    ]);
+}
+
+}
+
+public function getNews($id) {
+    $news=News::where("nid",$id)->where('status','1')->first();
+
+    if($news)
+    {
+    return response()->json([
+        'message' => 'Data Search Successfully',
+        'status' => 'success',
+        'data' => $news
+    ]);
+}
+else
+{
+    return response()->json([
+        'message' => 'Data not found...',
+        'status' => 'Failure',
+       
+    ]);
+}
+}
+
 
 
 
