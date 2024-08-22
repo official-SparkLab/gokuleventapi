@@ -28,7 +28,7 @@ class NewsController extends Controller
 
     public function index()
     {
-        $news=News::where('status','1')->all();
+        $news=News::where('status','1')->get();
 
         return response()->json([
             'message'=>'News Fetch Successfully',
