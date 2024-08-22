@@ -46,7 +46,7 @@ return response()->json([
 if ($product) {
     // Update the product fields
     $product->category = $request->input('category');
-    $product->subcategory = $request->input('subCategory');
+    $product->subcategory = $request->input('subcategory');
     $product->heading = $request->input('heading');
     $product->image = $request->input('image');
     $product->price = $request->input('price');
