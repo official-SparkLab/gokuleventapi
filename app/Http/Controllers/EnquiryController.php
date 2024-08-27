@@ -21,4 +21,37 @@ class EnquiryController extends Controller
             'data' => $save::get()
         ]);
     }
+    public function updateEnquiry(Request $request,$id)
+    {
+        $save=Enquiry::where("enq_id",$id)->first();
+        if($save)
+        {
+            $save->status="Completed";
+            $save->save();
+
+        }
+        return response()->json([
+            'message' =>'Enquiry Updated Successfully',
+            'status'=>'Successful',
+            'data'=>Enquiry::get()
+        ]);
+    }
+
+    public function index()
+    {
+        return response()->json([
+            'message' =>'Enquiry Fetched Successfully',
+            'status'=>'Successful',
+            'data'=>Enquiry::get()
+        ]);
+    }
+
+    public function getEnquiry($id)
+    {
+        return response()->json([
+            'message' =>'Enquiry Fetched Successfully',
+            'status'=>'Successful',
+            'data'=>Enquiry::where("enq_id",$id)->first()
+        ]);
+    }
 }

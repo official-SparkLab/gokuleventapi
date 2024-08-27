@@ -25,7 +25,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::POST('/signup',[UserregisterController::class,"store"]);
 Route::POST('/userLogin',[UserregisterController::class,"Login"]);
+
 Route::POST('/addEnquiry',[EnquiryController::class,"store"]);
+Route::GET('/updateEnquiry/{id}',[EnquiryController::class,"updateEnquiry"]);
+Route::GET('/searchAllEnquiry',[EnquiryController::class,"index"]);
+Route::GET('/searchByEnquiry/{id}',[EnquiryController::class,"getEnquiry"]);
 
 Route::POST('/addProduct',[ProductController::class,"store"]);
 Route::GET('/getAllProducts',[ProductController::class,"index"]);
