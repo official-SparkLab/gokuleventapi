@@ -16,8 +16,20 @@ class ProductController extends Controller
         $save->price=$request->price;
         $save->offer_price=$request->offer_price;
         $save->description=$request->description;
+        $save->description = $request->description;
+
+        $save->prod_img1 = $request->prod_img1;
+        $save->prod_img2 = $request->prod_img2;
+        $save->prod_img3 = $request->prod_img3;
+        $save->color = $request->color;
+        $save->prod_size = $request->prod_size;
+        $save->prod_description = $request->prod_description;
+        $save->customization = $request->customization;
+        $save->material = $request->material;
+        $save->model_no = $request->model_no;
+
         $save->status="1";
-       $save->top_sale="No";
+        $save->top_sale="No";
         $save->save();
 
         return response()->json([
@@ -52,7 +64,16 @@ if ($product) {
     $product->price = $request->input('price');
     $product->offer_price = $request->input('offer_price');
     $product->description = $request->input('description');
-    
+    $product->prod_img1 = $request->input('prod_img1');
+    $product->prod_img2 = $request->input('prod_img2');
+    $product->prod_img3 = $request->input('prod_img3');
+    $product->color = $request->input('color');
+    $product->prod_size = $request->input('prod_size');
+    $product->prod_description = $request->input('prod_description');
+    $product->customization = $request->input('customization');
+    $product->material = $request->input('material');
+    $product->model_no = $request->input('model_no');
+
     $product->save();
     return response()->json([
         'message' =>'Product Updated Successfully',
