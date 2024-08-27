@@ -16,7 +16,7 @@ class ProductController extends Controller
         $save->price=$request->price;
         $save->offer_price=$request->offer_price;
         $save->description=$request->description;
-        $save->description = $request->description;
+      
 
         $save->prod_img1 = $request->prod_img1;
         $save->prod_img2 = $request->prod_img2;
