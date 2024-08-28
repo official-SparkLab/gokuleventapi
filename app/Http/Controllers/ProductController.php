@@ -123,7 +123,7 @@ else
              return response()->json([
                 'message' =>'Product Added To Top-Sales',
                 'status'=>'Successful',
-                'data'=>Product::where('status','1')->all()
+                'data'=>Product::where('status','1')->get()
             ]);
         }
     }
