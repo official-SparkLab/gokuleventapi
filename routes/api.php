@@ -8,6 +8,8 @@ use App\Http\Controllers\ProductController;
 
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubCategoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -43,3 +45,15 @@ Route::GET('/getAllNews',[NewsController::class,"index"]);
 Route::PUT('/updateNews/{id}',[NewsController::class,"UpdateNews"]);
 Route::PUT('/deleteNews/{id}',[NewsController::class,"deleteNews"]);
 Route::GET('/getNews/{id}',[NewsController::class,"getNews"]);
+
+Route::POST('/addCategory',[CategoryController::class,"store"]);
+Route::GET('/getAllCategory',[CategoryController::class,"index"]);
+Route::GET('getSingleCategory/{id}',[CategoryController::class,"singleCategory"]);
+Route::PUT('/deleteCategory/{id}',[CategoryController::class,"deleteCategory"]);
+Route::PUT('/updateCategory/{id}',[CategoryController::class,"updateCategory"]);
+
+Route::POST('/addSubCategory',[SubCategoryController::class,"store"]);
+Route::GET('/getAllSubCategory',[SubCategoryController::class,"index"]);
+Route::GET('getSingleSubCategory/{id}',[SubCategoryController::class,"singleSubCategory"]);
+Route::PUT('/deleteSubCategory/{id}',[SubCategoryController::class,"deleteSubCategory"]);
+Route::PUT('/updateSubCategory/{id}',[SubCategoryController::class,"updateSubCategory"]);
