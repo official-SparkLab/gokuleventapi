@@ -17,6 +17,16 @@ class NewsController extends Controller
         $news->tags=$request->tags;
         $news->description=$request->description;
         $news->status="1";
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images/news'), $imageName);
+            $news->image = 'images/news/' . $imageName;
+        }
+        
+
+
         $news->save();
 
         return response()->json([
@@ -47,6 +57,13 @@ class NewsController extends Controller
         $news->category = $request->input('category');
         $news->tags = $request->input('tags');
         $news->description = $request->input('description');
+        
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images/news'), $imageName);
+            $news->image = 'images/news/' . $imageName;
+        }
         $news->save();
 
         return response()->json([

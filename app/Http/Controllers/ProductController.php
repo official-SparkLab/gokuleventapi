@@ -8,46 +8,75 @@ class ProductController extends Controller
 {
     public function store(Request $request)
     {
-        $save=new Product;
-        $save->category=$request->category;
-        $save->subcategory=$request->subCategory;
-        $save->heading=$request->heading;
-        $save->image=$request->image;
-        $save->price=$request->price;
-        $save->offer_price=$request->offer_price;
-        $save->description=$request->description;
-      
+        $save = new Product;
 
-        $save->prod_img1 = $request->prod_img1;
-        $save->prod_img2 = $request->prod_img2;
-        $save->prod_img3 = $request->prod_img3;
-        $save->color = $request->color;
-        $save->prod_size = $request->prod_size;
-        $save->prod_description = $request->prod_description;
-        $save->customization = $request->customization;
-        $save->material = $request->material;
-        $save->model_no = $request->model_no;
+// Save other product fields
+$save->category = $request->category;
+$save->subcategory = $request->subCategory;
+$save->heading = $request->heading;
+$save->price = $request->price;
+$save->offer_price = $request->offer_price;
+$save->description = $request->description;
+$save->color = $request->color;
+$save->prod_size = $request->prod_size;
+$save->prod_description = $request->prod_description;
+$save->customization = $request->customization;
+$save->material = $request->material;
+$save->model_no = $request->model_no;
+$save->status = "1";
+$save->top_sale = "No";
 
-        $save->status="1";
-        $save->top_sale="No";
-        $save->save();
+// Handle main image upload
+if ($request->hasFile('image')) {
+    $image = $request->file('image');
+    $imageName = time() . '_' . $image->getClientOriginalName();
+    $image->move(public_path('images/products'), $imageName);
+    $save->image = 'images/products/' . $imageName;
+}
 
-        return response()->json([
-            'message' =>'Product Added Successfully',
-            'status' =>'Success',
-            'data' => Product::where('status', '1')->get()
-        ]);
+
+if ($request->hasFile('prod_img1')) {
+    $prod_img1 = $request->file('prod_img1');
+    $prod_img1Name = time() . '_1_' . $prod_img1->getClientOriginalName();
+    $prod_img1->move(public_path('images/products'), $prod_img1Name);
+    $save->prod_img1 = 'images/products/' . $prod_img1Name;
+}
+
+if ($request->hasFile('prod_img2')) {
+    $prod_img2 = $request->file('prod_img2');
+    $prod_img2Name = time() . '_2_' . $prod_img2->getClientOriginalName();
+    $prod_img2->move(public_path('images/products'), $prod_img2Name);
+    $save->prod_img2 = 'images/products/' . $prod_img2Name;
+}
+
+if ($request->hasFile('prod_img3')) {
+    $prod_img3 = $request->file('prod_img3');
+    $prod_img3Name = time() . '_3_' . $prod_img3->getClientOriginalName();
+    $prod_img3->move(public_path('images/products'), $prod_img3Name);
+    $save->prod_img3 = 'images/products/' . $prod_img3Name;
+}
+
+// Save the product
+$save->save();
+
+// Return response
+return response()->json([
+    'message' => 'Product Added Successfully',
+    'status' => 'Success',
+    'data' => Product::where('status', '1')->get()
+]);
+
 
     }
     public function index()
     {
         $product = Product::where('status', '1')->get();
 
-return response()->json([
+    return response()->json([
     'message' => 'Product details fetched successfully',
     'status' => 'Success',
     'data' => $product
-]);
+    ]);
 
     }
 
@@ -73,6 +102,36 @@ if ($product) {
     $product->customization = $request->input('customization');
     $product->material = $request->input('material');
     $product->model_no = $request->input('model_no');
+
+    // Handle main image upload
+if ($request->hasFile('image')) {
+    $image = $request->file('image');
+    $imageName = time() . '_' . $image->getClientOriginalName();
+    $image->move(public_path('images/products'), $imageName);
+    $product->image = 'images/products/' . $imageName;
+}
+
+
+if ($request->hasFile('prod_img1')) {
+    $prod_img1 = $request->file('prod_img1');
+    $prod_img1Name = time() . '_1_' . $prod_img1->getClientOriginalName();
+    $prod_img1->move(public_path('images/products'), $prod_img1Name);
+    $product->prod_img1 = 'images/products/' . $prod_img1Name;
+}
+
+if ($request->hasFile('prod_img2')) {
+    $prod_img2 = $request->file('prod_img2');
+    $prod_img2Name = time() . '_2_' . $prod_img2->getClientOriginalName();
+    $prod_img2->move(public_path('images/products'), $prod_img2Name);
+    $product->prod_img2 = 'images/products/' . $prod_img2Name;
+}
+
+if ($request->hasFile('prod_img3')) {
+    $prod_img3 = $request->file('prod_img3');
+    $prod_img3Name = time() . '_3_' . $prod_img3->getClientOriginalName();
+    $prod_img3->move(public_path('images/products'), $prod_img3Name);
+    $product->prod_img3 = 'images/products/' . $prod_img3Name;
+}
 
     $product->save();
     return response()->json([
