@@ -13,6 +13,8 @@ class ProductController extends Controller
 // Save other product fields
 $save->category = $request->category;
 $save->subcategory = $request->subCategory;
+$save->cat_id = $request->cat_id;
+$save->subcat_id = $request->subcat_id;
 $save->heading = $request->heading;
 $save->price = $request->price;
 $save->offer_price = $request->offer_price;
@@ -88,6 +90,9 @@ if ($product) {
     // Update the product fields
     $product->category = $request->input('category');
     $product->subcategory = $request->input('subcategory');
+    $product->cat_id = $request->input('cat_id');
+    $product->subcat_id = $request->input('subcat_id');
+
     $product->heading = $request->input('heading');
     $product->image = $request->input('image');
     $product->price = $request->input('price');

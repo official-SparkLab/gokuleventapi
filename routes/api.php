@@ -10,6 +10,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -57,3 +58,5 @@ Route::GET('/getAllSubCategory',[SubCategoryController::class,"index"]);
 Route::GET('getSingleSubCategory/{id}',[SubCategoryController::class,"singleSubCategory"]);
 Route::PUT('/deleteSubCategory/{id}',[SubCategoryController::class,"deleteSubCategory"]);
 Route::PUT('/updateSubCategory/{id}',[SubCategoryController::class,"updateSubCategory"]);
+
+Route::POST('/addCart',[CartController::class,"store"]);
