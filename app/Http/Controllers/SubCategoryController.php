@@ -24,10 +24,14 @@ class SubCategoryController extends Controller
     public function index()
     {
         return response()->json([
-            'message' =>'Data Fetch successfully',
-            'status' =>'success',
-            'data' =>SubCategory::where("status","1")->get()
+            'message' => 'Data fetched successfully',
+            'status' => 'success',
+            'data' => SubCategory::where("sub_category.status", "1")
+                        ->join('category', 'sub_category.cat_id', '=', 'category.cat_id')
+                        ->select('sub_category.*', 'category.category') // select necessary columns
+                        ->get()
         ]);
+        
     }
 
     public function singleSubCategory($id)
