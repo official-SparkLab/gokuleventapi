@@ -60,3 +60,5 @@ Route::PUT('/deleteSubCategory/{id}',[SubCategoryController::class,"deleteSubCat
 Route::PUT('/updateSubCategory/{id}',[SubCategoryController::class,"updateSubCategory"]);
 
 Route::POST('/addCart',[CartController::class,"store"]);
+Route::GET('/myCart/{id}',[CartController::class,"index"]);
+Route::POST('/deleteCart',[CartController::class,"deleteCart"]);
