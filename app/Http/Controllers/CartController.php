@@ -13,7 +13,7 @@ class CartController extends Controller
          $cart->product_id=$request->product_id;
         
          $cart->price=$request->price;
-         $cart->total_price=$request->total_price;
+        
          $cart->status=$request->status;
          $cart->save();
          
