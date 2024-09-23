@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use Illuminate\Support\Facades\DB;
+
 class CartController extends Controller
 {
     public function store(Request $request)
@@ -28,7 +30,11 @@ class CartController extends Controller
     public function index($id)
     {
 
-       $cart = Cart::where("user_id", $id)->get();
+        $cart = DB::table('cart')
+        ->join('Product', 'cart.product_id', '=', 'Product.pid')
+        ->where('cart.user_id', $id)
+        ->select('cart.*', 'Product.*')  // Select relevant fields
+        ->get();
 
 if ($cart->isEmpty()) {
     return response()->json([
@@ -57,14 +63,14 @@ if ($cartItem) {
     return response()->json([
         'message' => 'Item removed from cart',
         'status' => 'success',
-        'data' => Cart::where("user_id", $request->user_id)->get() // Return updated cart data
+       
     ]);
 }
 
 return response()->json([
     'message' => 'Item not found in cart',
     'status' => 'error',
-    'data' => Cart::where("user_id", $request->user_id)->get() // Return the cart data
+    
 ]);
 
 
