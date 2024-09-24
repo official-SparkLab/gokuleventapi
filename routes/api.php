@@ -11,6 +11,7 @@ use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrdersController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -62,3 +63,6 @@ Route::PUT('/updateSubCategory/{id}',[SubCategoryController::class,"updateSubCat
 Route::POST('/addCart',[CartController::class,"store"]);
 Route::GET('/myCart/{id}',[CartController::class,"index"]);
 Route::POST('/deleteCart',[CartController::class,"deleteCart"]);
+
+Route::POST('/orders',[OrdersController::class,"store"]);
+Route::GET('/myOrders/{user_id}',[OrdersController::class,"index"]);
