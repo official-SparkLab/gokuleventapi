@@ -11,6 +11,8 @@ class OrdersController extends Controller
         $order=new Orders;
         $order->user_id=$request->user_id;
         $order->product_id=$request->product_id;
+        $order->customer_name=$request->customer_name;
+        $order->customer_contact=$request->customer_contact;
         $order->price=$request->price;
         $order->quantity=$request->quantity;
         $order->total_amount=$request->total_amount;
@@ -32,6 +34,15 @@ class OrdersController extends Controller
             'message' =>"Order Successfully",
             'status' =>'success',
             'data' =>Orders::where("user_id",$user_id)->get()
+         ]);
+    }
+
+    public function allOrders()
+    {
+        return response()->json([
+            'message' =>"Orders Fetch Successfully",
+            'status' =>'success',
+            'data' =>Orders::get()
          ]);
     }
 }
