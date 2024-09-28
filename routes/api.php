@@ -12,6 +12,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\CancelOrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -67,3 +68,7 @@ Route::POST('/deleteCart',[CartController::class,"deleteCart"]);
 Route::POST('/orders',[OrdersController::class,"store"]);
 Route::GET('/myOrders/{user_id}',[OrdersController::class,"index"]);
 Route::GET('/allOrders',[OrdersController::class,"allOrders"]);
+
+Route::POST("/cancelorder",[CancelOrderController::class,"store"]);
+Route::GET("/getCancelOrderUser/{user_id}",[CancelOrderController::class,"getCancelOrderUser"]);
+Route::GET("/getAllCancelOrder",[CancelOrderController::class,"getAllCancelOrders"]);

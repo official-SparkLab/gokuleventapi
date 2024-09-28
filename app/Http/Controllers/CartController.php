@@ -36,7 +36,7 @@ class CartController extends Controller
         ->select('cart.*', 'Product.*')  // Select relevant fields
         ->get();
 
-if ($cart->isEmpty()) {
+    if ($cart->isEmpty()) {
     return response()->json([
         'message' => "Cart is empty",
         'status' => 'error',
