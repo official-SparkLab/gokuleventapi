@@ -58,4 +58,17 @@ class OrdersController extends Controller
             'data' =>$allorder
          ]);
     }
+
+    public function orderStatus(Request $request)
+    {
+        $orderStatus=Orders::where("order_id",$request->order_id)->first();
+        $orderStatus->status=$request->status;
+        $orderStatus->save();
+        return response()->json([
+            'message' =>"Order Status Updated",
+            'status' =>'success',
+           
+         ]);
+    }
+
 }
