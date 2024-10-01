@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Orders;
+use Illuminate\Support\Facades\DB;
 class OrdersController extends Controller
 {
     public function store(Request $request)
@@ -30,19 +31,31 @@ class OrdersController extends Controller
 
     public function index($user_id)
     {
+        $myorder = DB::table('orders')
+        ->join('Product', 'orders.product_id', '=', 'Product.pid')
+        ->where('orders.user_id', $user_id)
+        ->select('orders.*', 'Product.heading', 'Product.image', 'Product.description')
+        ->get();
+    
         return response()->json([
             'message' =>"Order Successfully",
             'status' =>'success',
-            'data' =>Orders::where("user_id",$user_id)->get()
+            'data' =>$myorder
          ]);
     }
 
     public function allOrders()
     {
+        $allorder = DB::table('orders')
+        ->join('Product', 'orders.product_id', '=', 'Product.pid')
+       
+        ->select('orders.*', 'Product.heading', 'Product.image', 'Product.description')
+        ->get();
+    
         return response()->json([
-            'message' =>"Orders Fetch Successfully",
+            'message' =>"Order Successfully",
             'status' =>'success',
-            'data' =>Orders::get()
+            'data' =>$allorder
          ]);
     }
 }
