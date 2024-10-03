@@ -59,6 +59,22 @@ class OrdersController extends Controller
          ]);
     }
 
+
+    public function allOrdersById($order_id)
+    {
+        $myorder = DB::table('orders')
+        ->join('Product', 'orders.product_id', '=', 'Product.pid')
+        ->where('orders.order_id', $order_id)
+        ->select('orders.*', 'Product.heading', 'Product.image', 'Product.description')
+        ->get();
+    
+        return response()->json([
+            'message' =>"Order Successfully",
+            'status' =>'success',
+            'data' =>$myorder
+         ]);
+    }
+
     public function orderStatus(Request $request)
     {
         $orderStatus=Orders::where("order_id",$request->order_id)->first();

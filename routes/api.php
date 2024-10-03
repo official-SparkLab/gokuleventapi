@@ -30,6 +30,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::POST('/signup',[UserregisterController::class,"store"]);
 Route::POST('/userLogin',[UserregisterController::class,"Login"]);
+Route::GET('/getRegisterUsers',[UserregisterController::class,"index"]);
+Route::GET('/UsersById/{reg_id}', [UserregisterController::class, "userById"]);
+
 
 Route::POST('/addEnquiry',[EnquiryController::class,"store"]);
 Route::PUT('/updateEnquiry/{id}',[EnquiryController::class,"updateEnquiry"]);
@@ -71,6 +74,7 @@ Route::POST('orders',[OrdersController::class,"store"]);
 Route::GET('/myOrders/{user_id}',[OrdersController::class,"index"]);
 Route::GET('/allOrders',[OrdersController::class,"allOrders"]);
 Route::POST('/orderStatus',[OrdersController::class,"orderStatus"]);
+Route::GET('/allOrdersById/{order_id}',[OrdersController::class,"allOrdersById"]);
 
 Route::POST("/cancelorder",[CancelOrderController::class,"store"]);
 Route::GET("/getCancelOrderUser/{user_id}",[CancelOrderController::class,"getCancelOrderUser"]);

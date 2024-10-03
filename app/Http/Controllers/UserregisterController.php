@@ -35,6 +35,26 @@ class UserregisterController extends Controller
             ], 500);
         }
     } 
+
+    public function index()
+    {
+        return response()->json([
+            'message' =>"Data Fetch Successfully",
+            'status' =>'success',
+            'data' =>UserRegister::get()
+         ]);
+    }
+
+    public function userById($reg_id)
+    {
+        return response()->json([
+            'message' => "Data Fetch Successfully",
+            'status' => 'success',
+            'data' => UserRegister::where("id", $reg_id)->get()
+        ]);
+    }
+    
+
     public function Login(Request $request)
     {
         $user = UserRegister::where('email', $request->email)->first();
