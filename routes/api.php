@@ -32,7 +32,7 @@ Route::POST('/signup',[UserregisterController::class,"store"]);
 Route::POST('/userLogin',[UserregisterController::class,"Login"]);
 Route::GET('/getRegisterUsers',[UserregisterController::class,"index"]);
 Route::GET('/UsersById/{reg_id}', [UserregisterController::class, "userById"]);
-
+Route::POST('/updateUser/{id}',[UserregisterController::class,"update"]);
 
 Route::POST('/addEnquiry',[EnquiryController::class,"store"]);
 Route::PUT('/updateEnquiry/{id}',[EnquiryController::class,"updateEnquiry"]);

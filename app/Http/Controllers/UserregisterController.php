@@ -36,6 +36,43 @@ class UserregisterController extends Controller
         }
     } 
 
+    public function update(Request $request, $id)
+{
+    try {
+        // Find the user by ID
+        $signup = UserRegister::findOrFail($id);
+
+        // Update the user details
+        $signup->fullname = $request->fullname;
+        $signup->email = $request->email;
+        $signup->contact = $request->contact;
+        $signup->address = $request->address;
+        $signup->pincode = $request->pincode;
+
+        // Only update password if it's provided in the request
+        if ($request->has('pass')) {
+            $signup->pass = $request->pass;
+        }
+
+        // Save the changes
+        $signup->save();
+
+        return response()->json([
+            'message' => 'User updated successfully',
+            'status' => 'success'
+        ], 200);
+
+    } catch (Exception $e) {
+        // Catch any exception and return an error message
+        return response()->json([
+            'message' => 'Failed to update user',
+            'status' => 'error',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+
+
     public function index()
     {
         return response()->json([
