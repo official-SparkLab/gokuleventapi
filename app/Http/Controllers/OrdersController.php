@@ -87,4 +87,38 @@ class OrdersController extends Controller
          ]);
     }
 
+    public function dashboardSummery()
+    {
+        // Query to get the sum of total_amount and count of orders from the orders table
+$orderSummary = DB::table('orders')
+->select(
+    DB::raw('SUM(total_amount) as total_amount_sum'),
+    DB::raw('COUNT(order_id) as total_order_count')
+)
+->first();
+
+// Query to get the count of unique users from the userregister table
+$userCount = DB::table('userregister')
+->select(DB::raw('COUNT(DISTINCT id) as total_user_count'))
+->first();
+
+// Query to get the count of unique products from the Product table
+$productCount = DB::table('Product')
+->select(DB::raw('COUNT(DISTINCT pid) as total_product_count'))
+->first();
+
+// Combine the results in the response
+return response()->json([
+'message' => "Summary Retrieved Successfully",
+'status' => 'success',
+'data' => [
+    'total_amount_sum' => $orderSummary->total_amount_sum,
+    'total_order_count' => $orderSummary->total_order_count,
+    'total_user_count' => $userCount->total_user_count,
+    'total_product_count' => $productCount->total_product_count
+]
+]);
+
+    }
+
 }

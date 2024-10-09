@@ -79,3 +79,6 @@ Route::GET('/allOrdersById/{order_id}',[OrdersController::class,"allOrdersById"]
 Route::POST("/cancelorder",[CancelOrderController::class,"store"]);
 Route::GET("/getCancelOrderUser/{user_id}",[CancelOrderController::class,"getCancelOrderUser"]);
 Route::GET("/getAllCancelOrder",[CancelOrderController::class,"getAllCancelOrders"]);
+
+
+Route::GET('/dashboardSummery',[OrdersController::class,"dashboardSummery"]);
