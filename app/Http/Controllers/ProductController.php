@@ -82,81 +82,76 @@ return response()->json([
 
     }
 
-    public function updateProduct(Request $request,$id)
-    {
-        $product=Product::where("pid",$id)->first();
-
-if ($product) {
-    // Update the product fields
-    $product->category = $request->input('category');
-    $product->subcategory = $request->input('subcategory');
-    $product->cat_id = $request->input('cat_id');
-    $product->subcat_id = $request->input('subcat_id');
-
-    $product->heading = $request->input('heading');
-    $product->image = $request->input('image');
-    $product->price = $request->input('price');
-    $product->offer_price = $request->input('offer_price');
-    $product->description = $request->input('description');
-    $product->prod_img1 = $request->input('prod_img1');
-    $product->prod_img2 = $request->input('prod_img2');
-    $product->prod_img3 = $request->input('prod_img3');
-    $product->color = $request->input('color');
-    $product->prod_size = $request->input('prod_size');
-    $product->prod_description = $request->input('prod_description');
-    $product->customization = $request->input('customization');
-    $product->material = $request->input('material');
-    $product->model_no = $request->input('model_no');
-
-    // Handle main image upload
-if ($request->hasFile('image')) {
-    $image = $request->file('image');
-    $imageName = time() . '_' . $image->getClientOriginalName();
-    $image->move(public_path('images/products'), $imageName);
-    $product->image = 'images/products/' . $imageName;
-}
-
-
-if ($request->hasFile('prod_img1')) {
-    $prod_img1 = $request->file('prod_img1');
-    $prod_img1Name = time() . '_1_' . $prod_img1->getClientOriginalName();
-    $prod_img1->move(public_path('images/products'), $prod_img1Name);
-    $product->prod_img1 = 'images/products/' . $prod_img1Name;
-}
-
-if ($request->hasFile('prod_img2')) {
-    $prod_img2 = $request->file('prod_img2');
-    $prod_img2Name = time() . '_2_' . $prod_img2->getClientOriginalName();
-    $prod_img2->move(public_path('images/products'), $prod_img2Name);
-    $product->prod_img2 = 'images/products/' . $prod_img2Name;
-}
-
-if ($request->hasFile('prod_img3')) {
-    $prod_img3 = $request->file('prod_img3');
-    $prod_img3Name = time() . '_3_' . $prod_img3->getClientOriginalName();
-    $prod_img3->move(public_path('images/products'), $prod_img3Name);
-    $product->prod_img3 = 'images/products/' . $prod_img3Name;
-}
-
-    $product->save();
-    return response()->json([
-        'message' =>'Product Updated Successfully',
-        'status'=>'Successful',
-        'data'=>Product::where('status','1')->get()
-    ]);
-}
-else
+    public function updateProduct(Request $request, $id)
 {
-    // Save the changes
-  
+    // Retrieve the product by its id
+    $product = Product::where("pid", $id)->first();
+
+    if ($product) {
+        // Update the product fields directly from the request object
+        $product->category = $request->category;
+        $product->subcategory = $request->subcategory;
+        $product->cat_id = $request->cat_id;
+        $product->subcat_id = $request->subcat_id;
+        $product->heading = $request->heading;
+        $product->price = $request->price;
+        $product->offer_price = $request->offer_price;
+        $product->description = $request->description;
+        $product->color = $request->color;
+        $product->prod_size = $request->prod_size;
+        $product->prod_description = $request->prod_description;
+        $product->customization = $request->customization;
+        $product->material = $request->material;
+        $product->model_no = $request->model_no;
+
+        // Handle image upload for main image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images/products'), $imageName);
+            $product->image = 'images/products/' . $imageName;
+        }
+
+        // Handle prod_img1
+        if ($request->hasFile('prod_img1')) {
+            $prod_img1 = $request->file('prod_img1');
+            $prod_img1Name = time() . '_1_' . $prod_img1->getClientOriginalName();
+            $prod_img1->move(public_path('images/products'), $prod_img1Name);
+            $product->prod_img1 = 'images/products/' . $prod_img1Name;
+        }
+
+        // Handle prod_img2
+        if ($request->hasFile('prod_img2')) {
+            $prod_img2 = $request->file('prod_img2');
+            $prod_img2Name = time() . '_2_' . $prod_img2->getClientOriginalName();
+            $prod_img2->move(public_path('images/products'), $prod_img2Name);
+            $product->prod_img2 = 'images/products/' . $prod_img2Name;
+        }
+
+        // Handle prod_img3
+        if ($request->hasFile('prod_img3')) {
+            $prod_img3 = $request->file('prod_img3');
+            $prod_img3Name = time() . '_3_' . $prod_img3->getClientOriginalName();
+            $prod_img3->move(public_path('images/products'), $prod_img3Name);
+            $product->prod_img3 = 'images/products/' . $prod_img3Name;
+        }
+
+        // Save the updated product
+        $product->save();
 
         return response()->json([
-            'message' =>'Product not Updated',
-            'status'=>'Failure',
-           
+            'message' => 'Product Updated Successfully',
+            'status' => 'Success',
+            'data' => Product::where('status', '1')->get()
+        ]);
+    } else {
+        return response()->json([
+            'message' => 'Product not found',
+            'status' => 'Failure'
         ]);
     }
 }
+
 
     public function deleteProduct(Request $request,$id)
     {

@@ -41,7 +41,7 @@ Route::GET('/searchByEnquiry/{id}',[EnquiryController::class,"getEnquiry"]);
 
 Route::POST('/addProduct',[ProductController::class,"store"]);
 Route::GET('/getAllProducts',[ProductController::class,"index"]);
-Route::PUT('/updateProduct/{id}',[ProductController::class,"updateProduct"]);
+Route::POST('/updateProduct/{id}',[ProductController::class,"updateProduct"]);
 Route::PUT('/updateTopSale/{id}',[ProductController::class,"updateTopSales"]);
 Route::PUT('/deleteProduct/{id}',[ProductController::class,"deleteProduct"]);
 Route::GET('/searhById/{id}',[ProductController::class,"getProductByID"]);
