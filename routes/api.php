@@ -68,7 +68,7 @@ Route::POST('/addCart',[CartController::class,"store"]);
 Route::GET('/myCart/{id}',[CartController::class,"index"]);
 Route::POST('/deleteCart',[CartController::class,"deleteCart"]);
 
-Route::POST('/orders',[OrdersController::class,"store"]);
+
 
 Route::POST('orders',[OrdersController::class,"store"]);
 Route::GET('/myOrders/{user_id}',[OrdersController::class,"index"]);
