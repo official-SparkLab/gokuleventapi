@@ -18,8 +18,7 @@ use App\Http\Controllers\CancelOrderController;
 | API Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
+|
 | be assigned to the "api" middleware group. Make something great!
 |
 */
@@ -67,8 +66,6 @@ Route::PUT('/updateSubCategory/{id}',[SubCategoryController::class,"updateSubCat
 Route::POST('/addCart',[CartController::class,"store"]);
 Route::GET('/myCart/{id}',[CartController::class,"index"]);
 Route::POST('/deleteCart',[CartController::class,"deleteCart"]);
-
-
 
 Route::POST('orders',[OrdersController::class,"store"]);
 Route::GET('/myOrders/{user_id}',[OrdersController::class,"index"]);
